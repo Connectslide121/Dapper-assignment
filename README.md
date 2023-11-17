@@ -3,4 +3,4 @@
 # Dapper-assignment
 Lexicon - .NET course - Week 10 assignment
 
-Exercises to practice with Dapper and ASP.NET Web App MVC pattern.
+Exercises to practice with Dapper and ASP.NET Core Web App MVC pattern.

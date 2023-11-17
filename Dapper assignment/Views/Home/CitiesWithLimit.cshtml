@@ -1,0 +1,29 @@
+﻿@model List<City>
+@{
+    ViewData["Title"] = "List of cities with a limit";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Here is the result of the query:</p>
+
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>CountryCode</td>
+        <td>District</td>
+        <td>Population</td>
+    </tr>
+    @foreach (City city in @Model)
+    {
+        <tr>
+            <td>@city.Id</td>
+            <td>@city.Name</td>
+            <td>@city.CountryCode</td>
+            <td>@city.District</td>
+            <td>@city.Population</td>
+        </tr>
+    }
+
+</table>
+

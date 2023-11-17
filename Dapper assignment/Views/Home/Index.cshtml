@@ -3,7 +3,125 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the City Explorer</h1>
+    <p>Select a search query and input requested values if needed</a>.</p>
 </div>
 
+<style>
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Optional: Adjust button styles */
+    .form-group button {
+        margin-left: 10px; /* Add some space between the input and button */
+    }
+</style>
+
+<form id="cityExplorerForm">
+    <hr>
+    <!-- Form for GetCitiesByPopulation -->
+    <div class="form-group">
+        <div>
+        <label for="minPopulation">Min Population:</label>
+        <input type="number" id="minPopulation" name="minPopulation" required>
+
+        <label for="maxPopulation">Max Population:</label>
+        <input type="number" id="maxPopulation" name="maxPopulation" required>
+        </div>
+
+        <button type="button" onclick="getCitiesByPopulationBetween()">Search Cities By Population Between</button>
+    </div>
+    <hr>
+    <!-- Form for GetLimitedCities -->
+    <div class="form-group">
+        <div>
+        <label for="limit">Limit:</label>
+        <input type="number" id="limit" name="limit" required>
+        </div>
+
+        <button type="button" onclick="getLimitedCities()">Search Limited Cities</button>
+    </div>
+    <hr>
+    <!-- Form for GetCitiesByCountryCode -->
+    <div class="form-group">
+        <div>
+        <label for="countryCode">Country Code:</label>
+        <input type="text" id="countryCode" name="countryCode" required>
+        </div>
+
+        <button type="button" onclick="getCitiesByCountryCode()">Search Cities By Country Code</button>
+    </div>
+    <hr>
+    <!-- Form for GetEuropeanCountriesByLifeExpectancy -->
+    <div class="form-group">
+        <div>
+        </div>
+    <button type="button" onclick="getEuropeanCountriesByLifeExpectancy()">Get European Countries By Life Expectancy</button>
+    </div>
+    <hr>
+    <!-- Form for GetCitiesInCountry -->
+    <div class="form-group">
+        <div>
+        <label for="countryCodeCitiesInCountry">Country Code:</label>
+        <input type="text" id="countryCodeCitiesInCountry" name="countryCodeCitiesInCountry" required>
+        </div>
+
+        <button type="button" onclick="getCitiesInCountry()">Search Cities In Country</button>
+    </div>
+    <hr>
+    <!-- Form for GetCitiesInContinentWithLifeExpectancyAbove -->
+    <div class="form-group">
+        <div>
+        <label for="continent">Continent:</label>
+        <input type="text" id="continent" name="continent" required>
+
+        <label for="minLifeExpectancy">Min Life Expectancy:</label>
+        <input type="number" id="minLifeExpectancy" name="minLifeExpectancy" required>
+        </div>
+
+        <button type="button" onclick="getCitiesInContinentWithLifeExpectancyAbove()">Search Cities In Continent With Life Expectancy Above</button>
+    </div>
+    <hr>
+</form>
+
+<script>
+    function getCitiesByPopulationBetween() {
+        var minPopulation = document.getElementById("minPopulation").value;
+        var maxPopulation = document.getElementById("maxPopulation").value;
+        var url = `@Url.Action("CitiesByPopulationBetween", "Home")?minPopulation=${minPopulation}&maxPopulation=${maxPopulation}`;
+        window.location.href = url;
+    }
+
+    function getLimitedCities() {
+        var limit = document.getElementById("limit").value;
+        var url = `@Url.Action("CitiesWithLimit", "Home")?limit=${limit}`;
+        window.location.href = url;
+    }
+
+    function getCitiesByCountryCode() {
+        var countryCode = document.getElementById("countryCode").value;
+        var url = `@Url.Action("CitiesByCountryCode", "Home")?countryCode=${countryCode}`;
+        window.location.href = url;
+    }
+
+    function getEuropeanCountriesByLifeExpectancy() {
+        var url = `@Url.Action("EuropeanCountriesByLifeExpectancy", "Home")`;
+        window.location.href = url;
+    }
+
+    function getCitiesInCountry() {
+        var countryCodeCitiesInCountry = document.getElementById("countryCodeCitiesInCountry").value;
+        var url = `@Url.Action("CitiesInCountry", "Home")?countryCode=${countryCodeCitiesInCountry}`;
+        window.location.href = url;
+    }
+
+    function getCitiesInContinentWithLifeExpectancyAbove() {
+        var continent = document.getElementById("continent").value;
+        var minLifeExpectancy = document.getElementById("minLifeExpectancy").value;
+        var url = `@Url.Action("CitiesByContinentWithLifeExpectancyAbove", "Home")?continent=${continent}&minLifeExpectancy=${minLifeExpectancy}`;
+        window.location.href = url;
+    }
+</script>

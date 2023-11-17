@@ -2,6 +2,7 @@
 using Dapper_assignment.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static Dapper_assignment.Models.Country;
 
 namespace Dapper_assignment.Controllers
 {
@@ -19,16 +20,51 @@ namespace Dapper_assignment.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CitiesByPopulationBetween(int minPopulation, int maxPopulation)
+        {
+            List<City> cityList = new CityQuery().GetCitiesByPopulationBetween(minPopulation, maxPopulation);
+            return View(cityList);
+        }
+
+        [HttpGet]
+        public IActionResult CitiesWithLimit(int limit)
+        {
+            List<City> cityList = new CityQuery().GetLimitedCities(limit);
+            return View(cityList);
+        }
+
+        [HttpGet]
+        public IActionResult CitiesByCountryCode(string countryCode)
+        {
+            List<City> cityList = new CityQuery().GetCitiesByCountryCode(countryCode);
+            return View(cityList);
+        }
+
+        [HttpGet]
+        public IActionResult EuropeanCountriesByLifeExpectancy()
+        {
+            List<Country> countryList = new CityQuery().GetEuropeanCountriesByLifeExpectancy();
+            return View(countryList);
+        }
+
+        [HttpGet]
+        public IActionResult CitiesInCountry(string countryCode)
+        {
+            List<City> cityList = new CityQuery().GetCitiesInCountry(countryCode);
+            return View(cityList);
+        }
+
+        [HttpGet]
+        public IActionResult CitiesByContinentWithLifeExpectancyAbove(Continent continent, float minLifeExpectancy)
+        {
+            List<City> cityList = new CityQuery().GetCitiesByContinentWithLifeExpectancyAbove(continent, minLifeExpectancy);
+            return View(cityList);
+        }
+
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult CityQuery()
-        {
-            List<City> cityList = new CityQuery().GetCities(0, 10000);
-
-            return View(cityList);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
